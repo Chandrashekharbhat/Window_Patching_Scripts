@@ -9,10 +9,14 @@
 
 #Counter declaration and Initialization
 $SSU_Count = 0
-$Mandatory_Count_KBXXXXXXX =0
-$Mandatory_Count_KBXXXXXXY =0
+$Mandatory_Count_A =0
+$Mandatory_Count_B =0
 $CU_Count =0
 $VM = hostname
+
+#Define Mandatory KB
+$Mandatory_KB_A ='Mandatory_KB_A'
+$Mandatory_KB_B ='Mandatory_KB_B'
 
 #Define SSU
 $SSU_KB_Number = 'SSU_KB'
@@ -20,13 +24,14 @@ $SSU_KB_Number = 'SSU_KB'
 #Define CU 
 $CU_KB_Number = 'CU_KB'
 
+
 #Get installed hotfixes
 $installedKB = (get-hotfix | Select-Object  HotFixID).HotfixID
 
 #Verify the SSU Installed or not
 
 foreach ($SSU in $installedKB ){
- if( $SSU -eq '$SSU_KB_Number'){
+ if( $SSU -eq $SSU_KB_Number){
   #Write-Host "SSU Counter"
   $SSU_Count++
 }
@@ -38,6 +43,8 @@ foreach ($SSU in $installedKB ){
  #Download the SU and Install
  #Append the Download command
  
+
+
  #Installation commands
  Start-Process -wait wusa -ArgumentList "/update C:/SSU_KB.msu","/quiet","/norestart"
  $SUconfirm = Read-Host "Are you sure you want to restart the host $VM? (Yes/No)"
@@ -51,52 +58,53 @@ foreach ($SSU in $installedKB ){
  
 #Verify the Mandatory Kbs Installed or not
 
-$Mandatory = {
-KBXXXXXXX
-KBXXXXXXY
-}
+
 
 foreach ($Mandatory in $installedKB ){
- if($Mandatory  -eq 'KBXXXXXXX' ){
-   $Mandatory_Count_KBXXXXXXX++
+ if($Mandatory  -eq $Mandatory_KB_A ){
+   $Mandatory_Count_A++
 }
 }
 
 foreach ($Mandatory in $installedKB ){
- if($Mandatory  -eq 'KBXXXXXXY' ){
-   $Mandatory_Count_KBXXXXXXY++
+ if($Mandatory  -eq $Mandatory_KB_B ){
+   $Mandatory_Count_B++
 }
 }
 
 #installing Mandatory KBXXXXXXX
-    if($Mandatory_Count_KBXXXXXXX -ne 1){
+    if($Mandatory_Count_A -ne 1){
     Write-Host "Installing Mandatory"
     #Download the Mandatory KBXXXXXXX and Install
      #Append the Download command
-          
+       
+       
+         
      #Installation commands
     Start-Process -wait wusa -ArgumentList "/update C:/KBXXXXXXX.msu","/quiet","/norestart"
     }
   else{
-     Write-Host "Mandatory KBXXXXXXX Already Present"
+     Write-Host "Mandatory $Mandatory_KB_A Already Present"
   }
 #installing Mandatory KBXXXXXXY
-if($Mandatory_KBXXXXXXY -ne 1){
+if($Mandatory_Count_B -ne 1){
    Write-Host "Installing Mandatory $Mandatory_KBXXXXXXY"
    #Download the Mandatory KBXXXXXXY and Install
    #Append the Download 
    
+
+
    #Installation commands
    Start-Process -wait wusa -ArgumentList "/update C:/KBXXXXXXY.msu","/quiet","/norestart"
     }
   else{
-  Write-Host "Mandatory $Mandatory_KBXXXXXXY Already Present"
+  Write-Host "Mandatory $Mandatory_KB_B Already Present"
   }
     
 #Verify the CU Installtion
 
 foreach ($CU in $installedKB ){
-  if( $CU -eq '$CU_KB_Number'){
+  if( $CU -eq $CU_KB_Number){
    #Write-Host "CU Counter"
    $CU_Count++
  }
@@ -105,11 +113,13 @@ foreach ($CU in $installedKB ){
 #Install the CU
   if ($CU_Count -ne 1){
     $SSUInstalled = (get-hotfix -ID $SSU_KB_Number -ErrorAction SilentlyContinue).HotfixID 
-      if ($SSUInstalled -eq '$SSU_KB_Number'){
+      if ($SSUInstalled -eq $SSU_KB_Number){
           #Download the CU and Install
           Write-Host "Installing CU $CU_KB_Number"
           #Append the Download command
           
+
+
           #Installation commands
           Start-Process -wait wusa -ArgumentList "/update C:/CU_KB.msu","/quiet","/norestart"
           $CUconfirm = Read-Host "Are you sure you want to restart the VM $VM ? (Yes/No)"
