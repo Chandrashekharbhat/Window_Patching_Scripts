@@ -14,7 +14,7 @@ $Mandatory_Count_B =0
 $CU_Count =0
 $VM = hostname
 
-#Define Mandatory KB
+#Define Mandatory KB, In this example taken two mandatory KBs which are not part of CU. If you have more define and adjust the script accordingly
 $Mandatory_KB_A ='Mandatory_KB_A'
 $Mandatory_KB_B ='Mandatory_KB_B'
 
