@@ -19,7 +19,7 @@ $installedKB = (get-hotfix | Select-Object  HotFixID).HotfixID
 #Verify the SSU Installed or not
 
 foreach ($SSU in $installedKB ){
- if( $SSU -eq 'KB50193851'){
+ if( $SSU -eq 'SSU_KB_Number'){
   #Write-Host "SSU Counter"
   $SSU_Count++
 }
@@ -37,23 +37,23 @@ foreach ($SSU in $installedKB ){
 #Verify the Mandatory Kbs Installed or not
 
 $Mandatory = {
-KB5021234
-KB5012170
+KBXXXXXXX
+KBXXXXXXY
 }
 
 foreach ($Mandatory in $installedKB ){
- if($Mandatory  -eq 'KB5021234' ){
-   $Mandatory_Count1++
+ if($Mandatory  -eq 'KBXXXXXXX' ){
+   $Mandatory_Count_KBXXXXXXX++
 }
 }
 
 foreach ($Mandatory in $installedKB ){
- if($Mandatory  -eq 'KB5012170' ){
-   $Mandatory_Count2++
+ if($Mandatory  -eq 'KBXXXXXXY' ){
+   $Mandatory_Count_KBXXXXXXY++
 }
 }
 
-#installing Mandatory KB1
+#installing Mandatory KBXXXXXXX
     if($Mandatory_Count_KBXXXXXXX -ne 1){
     Write-Host "Installing Mandatory"
     #Download the Mandatory KBXXXXXXX and Install
@@ -61,7 +61,7 @@ foreach ($Mandatory in $installedKB ){
   else{
      Write-Host " Mandatory KBXXXXXXX Already Present"
   }
-#installing Mandatory KB2
+#installing Mandatory KBXXXXXXY
 if($Mandatory_KBXXXXXXY -ne 1){
    Write-Host "Installing Mandatory"
    #Download the Mandatory KBXXXXXXY and Install
@@ -73,7 +73,7 @@ if($Mandatory_KBXXXXXXY -ne 1){
 #Verify the CU Installtion
 
 foreach ($CU in $installedKB ){
-  if( $CU -eq 'KB5019385'){
+  if( $CU -eq 'CU_KB_Number'){
    #Write-Host "CU Counter"
    $CU_Count++
  }
