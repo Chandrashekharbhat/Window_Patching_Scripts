@@ -81,7 +81,7 @@ foreach ($CU in $installedKB ){
 
  #Install the CU
   if ($CU_Count -ne 1){
-  #Download the SU and Install
+  #Download the CU and Install
   }
   else{
   Write-Host " CU KB Already Present"
