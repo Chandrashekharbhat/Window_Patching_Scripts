@@ -36,7 +36,9 @@ foreach ($SSU in $installedKB ){
  if ($SSU_Count -ne 1){
  Write-Host "Installing SSU $SSU_KB_Number"
  #Download the SU and Install
- #Append the Download and installation commands
+ #Append the Download command
+ 
+ #Installation commands
  Start-Process -wait wusa -ArgumentList "/update C:/SSU_KB.msu","/quiet","/norestart"
  $SUconfirm = Read-Host "Are you sure you want to restart the host $VM? (Yes/No)"
  if($SUconfirm -eq "Yes") {
@@ -82,7 +84,9 @@ foreach ($Mandatory in $installedKB ){
 if($Mandatory_KBXXXXXXY -ne 1){
    Write-Host "Installing Mandatory $Mandatory_KBXXXXXXY"
    #Download the Mandatory KBXXXXXXY and Install
-   #Append the Download and installation commands
+   #Append the Download 
+   
+   #Installation commands
    Start-Process -wait wusa -ArgumentList "/update C:/KBXXXXXXY.msu","/quiet","/norestart"
     }
   else{
