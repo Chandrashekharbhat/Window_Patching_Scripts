@@ -61,7 +61,7 @@ foreach ($Mandatory in $installedKB ){
     #Append the Download and installation commands
     }
   else{
-     Write-Host " Mandatory KBXXXXXXX Already Present"
+     Write-Host "Mandatory KBXXXXXXX Already Present"
   }
 #installing Mandatory KBXXXXXXY
 if($Mandatory_KBXXXXXXY -ne 1){
@@ -70,7 +70,7 @@ if($Mandatory_KBXXXXXXY -ne 1){
    #Append the Download and installation commands
     }
   else{
-  Write-Host " Mandatory KBXXXXXXY Already Present"
+  Write-Host "Mandatory KBXXXXXXY Already Present"
   }
     
 #Verify the CU Installtion
@@ -95,6 +95,6 @@ foreach ($CU in $installedKB ){
   }
   }
   else{
-  Write-Host " CU KB Already Present"
+  Write-Host "CU KB Already Present"
   }
  
