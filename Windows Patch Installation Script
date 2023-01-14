@@ -30,6 +30,9 @@ foreach ($SSU in $installedKB ){
  Write-Host "Installing SSU"
  #Download the SU and Install
  #Append the Download and installation commands
+ Start-Process -wait wusa -ArgumentList "/update C:/SSU_KB.msu","/quiet","/norestart"
+ write-host "Restarting Computer"
+ #Restart-Computer
  }
  else{
   Write-Host "SSU Already Present"
@@ -59,6 +62,7 @@ foreach ($Mandatory in $installedKB ){
     Write-Host "Installing Mandatory"
     #Download the Mandatory KBXXXXXXX and Install
     #Append the Download and installation commands
+    Start-Process -wait wusa -ArgumentList "/update C:/KBXXXXXXX.msu","/quiet","/norestart"
     }
   else{
      Write-Host "Mandatory KBXXXXXXX Already Present"
@@ -68,6 +72,7 @@ if($Mandatory_KBXXXXXXY -ne 1){
    Write-Host "Installing Mandatory"
    #Download the Mandatory KBXXXXXXY and Install
    #Append the Download and installation commands
+   Start-Process -wait wusa -ArgumentList "/update C:/KBXXXXXXY.msu","/quiet","/norestart"
     }
   else{
   Write-Host "Mandatory KBXXXXXXY Already Present"
@@ -89,6 +94,9 @@ foreach ($CU in $installedKB ){
           #Download the CU and Install
           Write-Host "Installing CU"
           #Append the Download and installation commands
+          Start-Process -wait wusa -ArgumentList "/update C:/CU_KB.msu","/quiet","/norestart"
+          write-host "Restarting Computer"
+          #Restart-Computer
          }
          else{
   Write-Host "Install SSU First"
