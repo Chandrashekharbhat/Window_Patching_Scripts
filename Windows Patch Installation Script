@@ -7,10 +7,10 @@
 #--------------------------------------------------------------------------
 
 
-#Counter declaration and initilization
+#Counter declaration and Initialization
 $SSU_Count = 0
-$Mandatory_Count1 =0
-$Mandatory_Count2 =0
+$Mandatory_Count_KBXXXXXXX =0
+$Mandatory_Count_KBXXXXXXY =0
 $CU_Count =0
 
 #Get installed hotfixes
@@ -54,20 +54,20 @@ foreach ($Mandatory in $installedKB ){
 }
 
 #installing Mandatory KB1
-    if($Mandatory_Count1 -ne 1){
+    if($Mandatory_Count_KBXXXXXXX -ne 1){
     Write-Host "Installing Mandatory"
-    #Download the Mandatory KB and Install
+    #Download the Mandatory KBXXXXXXX and Install
     }
   else{
-     Write-Host " Mandatory KB Already Present"
+     Write-Host " Mandatory KBXXXXXXX Already Present"
   }
 #installing Mandatory KB2
-if($Mandatory_Count2 -ne 1){
+if($Mandatory_KBXXXXXXY -ne 1){
    Write-Host "Installing Mandatory"
-   #Download the Mandatory KB and Install
+   #Download the Mandatory KBXXXXXXY and Install
     }
   else{
-  Write-Host " Mandatory KB Already Present"
+  Write-Host " Mandatory KBXXXXXXY Already Present"
   }
     
 #Verify the CU Installtion
