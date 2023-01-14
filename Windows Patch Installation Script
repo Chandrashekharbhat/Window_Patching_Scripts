@@ -31,8 +31,10 @@ foreach ($SSU in $installedKB ){
  #Download the SU and Install
  #Append the Download and installation commands
  Start-Process -wait wusa -ArgumentList "/update C:/SSU_KB.msu","/quiet","/norestart"
- write-host "Restarting Computer"
- #Restart-Computer
+ $SUconfirm = Read-Host "Are you sure you want to restart the computer? (Yes/No)"
+ if($SUconfirm -eq "Yes") {
+    Restart-Computer -WhatIf:$false -Confirm:$false
+}
  }
  else{
   Write-Host "SSU Already Present"
@@ -95,8 +97,10 @@ foreach ($CU in $installedKB ){
           Write-Host "Installing CU"
           #Append the Download and installation commands
           Start-Process -wait wusa -ArgumentList "/update C:/CU_KB.msu","/quiet","/norestart"
-          write-host "Restarting Computer"
-          #Restart-Computer
+          $CUconfirm = Read-Host "Are you sure you want to restart the computer? (Yes/No)"
+          if($CUconfirm -eq "Yes") {
+          Restart-Computer -WhatIf:$false -Confirm:$false
+          }
          }
          else{
   Write-Host "Install SSU First"
