@@ -1,26 +1,30 @@
 #Windows Patch Installation Script
+#Script  : Windows Patch Installation Script.ps1 
+#Author  : chandrashekharbhat@rocketmail.com  
+#Version : 0.1
+#Description : Validate the pactches on the VM and install it.
 
-#Set the counter to 0
+
+#Counter declaration and initilization
 $SSU_Count = 0
 $Mandatory_Count1 =0
 $Mandatory_Count2 =0
 $CU_Count =0
-#installed hotfixes
+
+#Get installed hotfixes
 $installedKB = (get-hotfix | Select-Object  HotFixID).HotfixID
-#Validate the SSU
 
+#Verify the SSU Installed or not
 
-foreach ($SSU in $installedKB )
-{
+foreach ($SSU in $installedKB ){
  if( $SSU -eq 'KB50193851'){
   #Write-Host "SSU Counter"
   $SSU_Count++
 }
 }
 
-#Install the SSU
- if ($SSU_Count -ne 1)
- {
+#SSU Installation
+ if ($SSU_Count -ne 1){
  Write-Host "Installing SSU"
  #Download the SU and Install
  }
@@ -28,50 +32,45 @@ foreach ($SSU in $installedKB )
   Write-Host "SSU Alrady Present"
  }
  
-#Validate the Mandatory KBs
+#Verify the Mandatory Kbs Installed or not
 
 $Mandatory = {
 KB5021234
 KB5012170
 }
 
-foreach ($Mandatory in $installedKB )
-{
+foreach ($Mandatory in $installedKB ){
  if($Mandatory  -eq 'KB5021234' ){
-  $Mandatory_Count1++
+   $Mandatory_Count1++
 }
 }
 
-foreach ($Mandatory in $installedKB )
-{
+foreach ($Mandatory in $installedKB ){
  if($Mandatory  -eq 'KB5012170' ){
-  $Mandatory_Count2++
- 
+   $Mandatory_Count2++
 }
 }
 
-#installing Mandatory KB
-if($Mandatory_Count1 -ne 1)
-{Write-Host "Installing Mandatory"
-  #Download the Mandatory KB and Install
+#installing Mandatory KB1
+    if($Mandatory_Count1 -ne 1){
+    Write-Host "Installing Mandatory"
+    #Download the Mandatory KB and Install
+    }
+  else{
+     Write-Host " Mandatory KB Already Present"
   }
+#installing Mandatory KB2
+if($Mandatory_Count2 -ne 1){
+   Write-Host "Installing Mandatory"
+   #Download the Mandatory KB and Install
+    }
   else{
   Write-Host " Mandatory KB Already Present"
   }
+    
+#Verify the CU Installtion
 
-if($Mandatory_Count2 -ne 1)
-{Write-Host "Installing Mandatory"
-  #Download the Mandatory KB and Install
-  }
-  else{
-  Write-Host " Mandatory KB Already Present"
-  }
-   
-   
-#Validate CU
-
-foreach ($CU in $installedKB )
-{
+foreach ($CU in $installedKB ){
   if( $CU -eq 'KB5019385'){
    #Write-Host "CU Counter"
    $CU_Count++
@@ -79,13 +78,10 @@ foreach ($CU in $installedKB )
  }
 
  #Install the CU
-  if ($CU_Count -ne 1)
-  {
+  if ($CU_Count -ne 1){
   #Download the SU and Install
   }
   else{
   Write-Host " CU KB Already Present"
   }
-  
-
   
