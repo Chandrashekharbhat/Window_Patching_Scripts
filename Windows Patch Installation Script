@@ -29,6 +29,7 @@ foreach ($SSU in $installedKB ){
  if ($SSU_Count -ne 1){
  Write-Host "Installing SSU"
  #Download the SU and Install
+ #Append the Download and installation commands
  }
  else{
   Write-Host "SSU Already Present"
@@ -57,6 +58,7 @@ foreach ($Mandatory in $installedKB ){
     if($Mandatory_Count_KBXXXXXXX -ne 1){
     Write-Host "Installing Mandatory"
     #Download the Mandatory KBXXXXXXX and Install
+    #Append the Download and installation commands
     }
   else{
      Write-Host " Mandatory KBXXXXXXX Already Present"
@@ -65,6 +67,7 @@ foreach ($Mandatory in $installedKB ){
 if($Mandatory_KBXXXXXXY -ne 1){
    Write-Host "Installing Mandatory"
    #Download the Mandatory KBXXXXXXY and Install
+   #Append the Download and installation commands
     }
   else{
   Write-Host " Mandatory KBXXXXXXY Already Present"
@@ -79,11 +82,19 @@ foreach ($CU in $installedKB ){
  }
  }
 
- #Install the CU
+#Install the CU
   if ($CU_Count -ne 1){
-  #Download the CU and Install
+    $SSUInstalled = (get-hotfix -ID SSU_KB_Number -ErrorAction SilentlyContinue).HotfixID 
+      if ($SSUInstalled -eq 'SSU_KB_Number'){
+          #Download the CU and Install
+          Write-Host "Installing CU"
+          #Append the Download and installation commands
+         }
+         else{
+  Write-Host "Install SSU First"
+  }
   }
   else{
   Write-Host " CU KB Already Present"
   }
-  
+ 
