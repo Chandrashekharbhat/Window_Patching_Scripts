@@ -6,6 +6,14 @@
 #Description : Validate the pactches on the VM and install it.
 #--------------------------------------------------------------------------
 
+$Logfile = "C:\patch_installation.log"
+function WriteLog
+{
+Param ([string]$LogString)
+$Stamp = (Get-Date).toString("yyyy/MM/dd HH:mm:ss")
+$LogMessage = "$Stamp $LogString"
+Add-content $LogFile -value $LogMessage
+}
 
 #Counter declaration and Initialization
 $SSU_Count = 0
@@ -40,6 +48,7 @@ foreach ($SSU in $installedKB ){
 #SSU Installation
  if ($SSU_Count -ne 1){
  Write-Host "Installing SSU $SSU_KB_Number"
+ WriteLog "Installing SSU $SSU_KB_Number"
  #Download the SU and Install
  #Append the Download command
  
@@ -54,6 +63,7 @@ foreach ($SSU in $installedKB ){
  }
  else{
   Write-Host "SSU $SSU_KB_Number Already Present"
+  WriteLog "SSU $SSU_KB_Number Already Present"
  }
  
 #Verify the Mandatory Kbs Installed or not
@@ -72,9 +82,10 @@ foreach ($Mandatory in $installedKB ){
 }
 }
 
-#installing Mandatory KBXXXXXXX
+#installing Mandatory Mandatory_KB_A
     if($Mandatory_Count_A -ne 1){
     Write-Host "Installing Mandatory $Mandatory_KB_A"
+    WriteLog "Installing Mandatory $Mandatory_KB_A"
     #Download the Mandatory KBXXXXXXX and Install
      #Append the Download command
        
@@ -85,10 +96,12 @@ foreach ($Mandatory in $installedKB ){
     }
   else{
      Write-Host "Mandatory $Mandatory_KB_A Already Present"
+     WriteLog "Mandatory $Mandatory_KB_A Already Present"
   }
-#installing Mandatory KBXXXXXXY
+#installing Mandatory Mandatory_KB_B
 if($Mandatory_Count_B -ne 1){
    Write-Host "Installing Mandatory $Mandatory_KB_B"
+   WriteLog "Installing Mandatory $Mandatory_KB_B"
    #Download the Mandatory KBXXXXXXY and Install
    #Append the Download 
    
@@ -99,6 +112,7 @@ if($Mandatory_Count_B -ne 1){
     }
   else{
   Write-Host "Mandatory $Mandatory_KB_B Already Present"
+  WriteLog "Mandatory $Mandatory_KB_B Already Present"
   }
     
 #Verify the CU Installtion
@@ -116,6 +130,7 @@ foreach ($CU in $installedKB ){
       if ($SSUInstalled -eq $SSU_KB_Number){
           #Download the CU and Install
           Write-Host "Installing CU $CU_KB_Number"
+          WriteLog "Installing CU $CU_KB_Number"
           #Append the Download command
           
 
@@ -128,10 +143,11 @@ foreach ($CU in $installedKB ){
           }
          }
          else{
-  Write-Host "Install SSU First $SSU_KB_Number "
+  Write-Host "Install SSU First $SSU_KB_Number"
+  WriteLog "Install SSU First $SSU_KB_Number"
   }
   }
   else{
   Write-Host "CU $CU_KB_Number Already Present"
+  WriteLog "CU $CU_KB_Number Already Present"
   }
- 
