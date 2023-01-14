@@ -1,0 +1,91 @@
+#Windows Patch Installation Script
+
+#Set the counter to 0
+$SSU_Count = 0
+$Mandatory_Count1 =0
+$Mandatory_Count2 =0
+$CU_Count =0
+#installed hotfixes
+$installedKB = (get-hotfix | Select-Object  HotFixID).HotfixID
+#Validate the SSU
+
+
+foreach ($SSU in $installedKB )
+{
+ if( $SSU -eq 'KB50193851'){
+  #Write-Host "SSU Counter"
+  $SSU_Count++
+}
+}
+
+#Install the SSU
+ if ($SSU_Count -ne 1)
+ {
+ Write-Host "Installing SSU"
+ #Download the SU and Install
+ }
+ else{
+  Write-Host "SSU Alrady Present"
+ }
+ 
+#Validate the Mandatory KBs
+
+$Mandatory = {
+KB5021234
+KB5012170
+}
+
+foreach ($Mandatory in $installedKB )
+{
+ if($Mandatory  -eq 'KB5021234' ){
+  $Mandatory_Count1++
+}
+}
+
+foreach ($Mandatory in $installedKB )
+{
+ if($Mandatory  -eq 'KB5012170' ){
+  $Mandatory_Count2++
+ 
+}
+}
+
+#installing Mandatory KB
+if($Mandatory_Count1 -ne 1)
+{Write-Host "Installing Mandatory"
+  #Download the Mandatory KB and Install
+  }
+  else{
+  Write-Host " Mandatory KB Already Present"
+  }
+
+if($Mandatory_Count2 -ne 1)
+{Write-Host "Installing Mandatory"
+  #Download the Mandatory KB and Install
+  }
+  else{
+  Write-Host " Mandatory KB Already Present"
+  }
+   
+   
+#Validate CU
+
+foreach ($CU in $installedKB )
+{
+  if( $CU -eq 'KB5019385'){
+   #Write-Host "CU Counter"
+   $CU_Count++
+ }
+ }
+
+ #Install the CU
+  if ($CU_Count -ne 1)
+  {
+  #Download the SU and Install
+  }
+  else{
+  Write-Host " CU KB Already Present"
+  }
+  
+
+  
