@@ -1,9 +1,11 @@
 #Windows Patch Installation Script
+#--------------------------------------------------------------------------
 #Script  : Windows Patch Installation Script.ps1 
 #Author  : chandrashekharbhat@rocketmail.com  
 #Version : 0.1
 #Description : Validate the pactches on the VM and install it.
-
+#--------------------------------------------------------------------------
+# Script need to be adjusted as per your requirement , its just a skeleton 
 
 #Counter declaration and initilization
 $SSU_Count = 0
@@ -29,7 +31,7 @@ foreach ($SSU in $installedKB ){
  #Download the SU and Install
  }
  else{
-  Write-Host "SSU Alrady Present"
+  Write-Host "SSU Already Present"
  }
  
 #Verify the Mandatory Kbs Installed or not
