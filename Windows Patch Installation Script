@@ -12,7 +12,7 @@ $SSU_Count = 0
 $Mandatory_Count_KBXXXXXXX =0
 $Mandatory_Count_KBXXXXXXY =0
 $CU_Count =0
-
+$VM = hostname
 #Get installed hotfixes
 $installedKB = (get-hotfix | Select-Object  HotFixID).HotfixID
 
@@ -31,7 +31,7 @@ foreach ($SSU in $installedKB ){
  #Download the SU and Install
  #Append the Download and installation commands
  Start-Process -wait wusa -ArgumentList "/update C:/SSU_KB.msu","/quiet","/norestart"
- $SUconfirm = Read-Host "Are you sure you want to restart the computer? (Yes/No)"
+ $SUconfirm = Read-Host "Are you sure you want to restart the host $VM? (Yes/No)"
  if($SUconfirm -eq "Yes") {
     Restart-Computer -WhatIf:$false -Confirm:$false
 }
@@ -97,7 +97,7 @@ foreach ($CU in $installedKB ){
           Write-Host "Installing CU"
           #Append the Download and installation commands
           Start-Process -wait wusa -ArgumentList "/update C:/CU_KB.msu","/quiet","/norestart"
-          $CUconfirm = Read-Host "Are you sure you want to restart the computer? (Yes/No)"
+          $CUconfirm = Read-Host "Are you sure you want to restart the VM $VM ? (Yes/No)"
           if($CUconfirm -eq "Yes") {
           Restart-Computer -WhatIf:$false -Confirm:$false
           }
