@@ -74,28 +74,28 @@ foreach ($Mandatory in $installedKB ){
 
 #installing Mandatory KBXXXXXXX
     if($Mandatory_Count_A -ne 1){
-    Write-Host "Installing Mandatory"
+    Write-Host "Installing Mandatory $Mandatory_KB_A"
     #Download the Mandatory KBXXXXXXX and Install
      #Append the Download command
        
        
          
      #Installation commands
-    Start-Process -wait wusa -ArgumentList "/update C:/KBXXXXXXX.msu","/quiet","/norestart"
+    Start-Process -wait wusa -ArgumentList "/update C:/Mandatory_KB_A.msu","/quiet","/norestart"
     }
   else{
      Write-Host "Mandatory $Mandatory_KB_A Already Present"
   }
 #installing Mandatory KBXXXXXXY
 if($Mandatory_Count_B -ne 1){
-   Write-Host "Installing Mandatory $Mandatory_KBXXXXXXY"
+   Write-Host "Installing Mandatory $Mandatory_KB_B"
    #Download the Mandatory KBXXXXXXY and Install
    #Append the Download 
    
 
 
    #Installation commands
-   Start-Process -wait wusa -ArgumentList "/update C:/KBXXXXXXY.msu","/quiet","/norestart"
+   Start-Process -wait wusa -ArgumentList "/update C:/Mandatory_KB_B.msu","/quiet","/norestart"
     }
   else{
   Write-Host "Mandatory $Mandatory_KB_B Already Present"
