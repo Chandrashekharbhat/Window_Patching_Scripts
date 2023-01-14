@@ -63,7 +63,9 @@ foreach ($Mandatory in $installedKB ){
     if($Mandatory_Count_KBXXXXXXX -ne 1){
     Write-Host "Installing Mandatory"
     #Download the Mandatory KBXXXXXXX and Install
-    #Append the Download and installation commands
+     #Append the Download command
+          
+     #Installation commands
     Start-Process -wait wusa -ArgumentList "/update C:/KBXXXXXXX.msu","/quiet","/norestart"
     }
   else{
@@ -95,7 +97,9 @@ foreach ($CU in $installedKB ){
       if ($SSUInstalled -eq 'SSU_KB_Number'){
           #Download the CU and Install
           Write-Host "Installing CU"
-          #Append the Download and installation commands
+          #Append the Download command
+          
+          #Installation commands
           Start-Process -wait wusa -ArgumentList "/update C:/CU_KB.msu","/quiet","/norestart"
           $CUconfirm = Read-Host "Are you sure you want to restart the VM $VM ? (Yes/No)"
           if($CUconfirm -eq "Yes") {
